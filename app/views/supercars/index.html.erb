@@ -1,0 +1,140 @@
+<h1>All the supercars, dawg!</h1>
+<br>
+
+<h4>Most Recently Indexed Supercars</h4>
+<br>
+
+<div class="index-top-container">
+ <div class="index-top-left-list" style="display:inline-block;">
+ <div class = "table-responsive" >
+    <table class="table table-striped">
+      <tr>
+        <th><h3>Make</h3></th>
+        <th><h3>Model</h3></th>
+        <th><h3>City</h3></th>
+        <th><h3>Country</h3></th>
+        <th><h3>Spotted By</h3></th>
+        <th></th>
+      </tr>
+      <% @supercars.each do |supercar| %>
+        <tr>
+          <td>
+            <h5>
+                <%= supercar.make.name %>
+                
+            </h5>
+          </td>
+          <td>
+          <h5>
+                <%= supercar.car_model.name %>
+
+            </h5>
+            </td>
+          <td> 
+            <% if supercar.user %>
+              <%= supercar.user.username %>
+            <% else %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+    </div>
+    </div>
+    <div class="index-ad-space" style="display:inline-block;width:30%;float:right;">
+    <br>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="input-group">        
+            <input type="text" class="form-control" placeholder="Search for Manufacturer...">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">Go!</button>
+            </span>
+          </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for Model...">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">Go!</button>
+            </span>
+          </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+      </div>
+      <br>
+       <div class="row">
+        <div class="col-lg-12">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for City...">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">Go!</button>
+            </span>
+          </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+      </div>
+      <br>
+       <div class="row">
+        <div class="col-lg-12">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for Country...">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">Go!</button>
+            </span>
+          </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+      </div>
+      <div style="text-align: right;">
+      </div>
+    </div>
+  
+  </div><!-- /.inex-top-container -->
+
+<br>
+
+<div class="container" id="tourpackages-carousel">
+  <% @supercars.each_slice(3).each do |group| %>
+      <div class="row">
+      <% group.each do |supercar| %>
+        <div id ="thumb-grid" class="col-xs-18 col-sm-6 col-m-4 col-lg-4">
+          <div class="thumbnail">
+            <div class = "insta-thumb">       
+
+              <%= render :inline => supercar.html.html_safe %>
+            </div>
+            <div class="caption">
+            <div id="thumbnail-left-info" >
+               <h3>City:</h3>  
+              <h3>Country:</h3>
+              <% if supercar.user %>
+                  <h3>Spotted by:</h3>
+                  <p><%= supercar.user.username %></p>
+                <% else %>
+              <% end %>
+            </div>
+            <div id="thumbnail-right-info">              
+              <h3>Manufacturer:</h3>       
+              
+               <%= supercar.make.name %>
+
+              
+              <h3>Model:</h3>
+
+              <h5>
+              <%= supercar.car_model.name %>
+
+              </h5> 
+            </div>          
+             
+                                                           
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div><!-- End row -->
+  <% end %>
+  <div style="text-align: right;"> 
+  </div>  
+</div><!-- End container -->
