@@ -4,12 +4,22 @@ SupercarindexDotNet::Application.routes.draw do
   get "inside", to: "pages#inside", as: "inside"
   
   resources :supercars
-  resources :makes
+  # resources :makes
   resources :car_models
   resources :cities
   resources :countries
-  
-  # get 'makes/:name', to: 'makes#index', as: :by_makes
+
+  resources :makes, :key => :name do
+    resources :cities, :key => :name do
+      resources :countries, :key => :name
+  end
+end
+
+  get 'makes/:name', to: 'makes#allmodels', as: :by_makes
+  get 'models/:name', to: 'car_models#allmodels', as: :by_models
+  get 'cities/:name', to: 'cities#allmodels', as: :by_cities
+  get 'countries/:name', to: 'countries#allmodels', as: :by_countries
+
 
 
   devise_for :users

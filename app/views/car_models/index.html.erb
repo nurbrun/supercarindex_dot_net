@@ -1,0 +1,5 @@
+<h1>All Supercar Models</h1>
+
+<% @car_models.each do |car_model| %>
+	<p><%= link_to car_model.name, by_makes_path(car_model.name) %></p>
+<% end %>

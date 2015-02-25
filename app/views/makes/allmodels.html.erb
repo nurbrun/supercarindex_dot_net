@@ -1,0 +1,99 @@
+<br>
+<h3>All <%= @makes.last.name %>'s</h3>
+
+<!-- 
+<% @makes.each do |make| %>
+  <%= make.name %>
+<% end %>
+
+ -->
+
+<br>
+
+<table class="table table-striped">
+  <tr>
+    <th>Make</th>
+    <th>Model</th>
+    <th>City</th>
+    <th>Country</th>
+    <th>Spotted By</th>
+  </tr>
+  <% @supercars.each do |supercar| %>
+    <tr>
+      <td><%= supercar.make.name %></td>
+      <td><%= supercar.car_model.name %></td>
+      <td><%= supercar.city.name %></td>
+      <td><%= supercar.country.name %></td>
+      <td> 
+        <% if supercar.user %>
+          <%= supercar.user.username %>
+        <% else %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+
+
+</table>
+<br>
+<div style="text-align: right;"> 
+  <%= will_paginate @supercars, renderer: BootstrapPagination::Rails %>
+  </div>
+  <div class="container" id="tourpackages-carousel">
+  <% @supercars.each_slice(3).each do |group| %>
+      <div class="row">
+      <% group.each do |supercar| %>
+        <div id ="thumb-grid" class="col-xs-18 col-sm-6 col-m-4 col-lg-4">
+          <div class="thumbnail">
+          <div class = "insta-thumb">
+              <%= render :inline => supercar.html.html_safe %>
+          </div>
+            <div class="caption">
+              <br>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal_<%= supercar.id %>">
+                Enrlarge this shiz
+              </button>
+              <!-- Modal -->
+              <div class="modal fade" id="myModal_<%= supercar.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel"><%= make.name %> <%= supercar.car_model.name %> in <%= supercar.city.name %></h4>
+                    </div>
+                    <div class="modal-body">
+                      <%= render :inline => supercar.html.html_safe %>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Modal -->       
+              <h4>Manufacturer:</h4>       
+              <h5><%= supercar.make.name %></h5>
+              <h4>Model:</h4>  
+              <h5><%= supercar.car_model.name %></h5>
+              <h4>City:</h4>  
+              <h5><%= supercar.city.name %></h5>
+              <h4>Country:</h4>
+              <h5><%= supercar.country.name %></h5>
+              <% if supercar.user %>
+                  <h4>Spotted by:</h4>
+                  <p><%= supercar.user.username %></p>
+                <% else %>
+              <% end %>                                              
+            </div>
+          </div>
+        </div>
+      <% end %>      
+    </div><!-- End row -->
+  <% end %>
+  <div style="text-align: right;">  
+  <%= will_paginate @supercars, renderer: BootstrapPagination::Rails %> 
+  </div>
+</div><!-- End container -->
+
+  

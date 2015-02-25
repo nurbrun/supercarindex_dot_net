@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150222203331) do
+ActiveRecord::Schema.define(version: 20150224045104) do
 
   create_table "car_models", force: :cascade do |t|
     t.integer  "supercar_id"
@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(version: 20150222203331) do
     t.integer  "city_id"
     t.integer  "country_id"
     t.integer  "spot_type_id"
+    t.integer  "user_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,0 +1,5 @@
+<h1>All Manufactures</h1>
+
+<% @makes.each do |make| %>
+	<p><%= link_to make.name, by_makes_path(make.name) %></p>
+<% end %>

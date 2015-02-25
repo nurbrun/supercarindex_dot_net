@@ -29,7 +29,7 @@ gem 'bootstrap-sass', '3.3.3'
 group :development, :test do
   gem 'byebug', '3.5.1'
   gem 'web-console', '2.0.0'
-
+  gem 'pry-rails'
   # Figaro: https://github.com/laserlemon/figaro
   gem 'figaro', '1.0.0'
 
@@ -62,3 +62,4 @@ group :production do
 end
 
 gem 'ruby-oembed'
+gem 'will_paginate-bootstrap'

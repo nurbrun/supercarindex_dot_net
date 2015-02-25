@@ -30,6 +30,18 @@
 
             </h5>
             </td>
+                      <td>
+          <h5>
+                <%= supercar.city.name %>
+
+            </h5>
+            </td>
+                      <td>
+          <h5>
+                <%= supercar.country.name %>
+
+            </h5>
+            </td>
           <td> 
             <% if supercar.user %>
               <%= supercar.user.username %>
@@ -100,18 +112,21 @@
       <% group.each do |supercar| %>
         <div id ="thumb-grid" class="col-xs-18 col-sm-6 col-m-4 col-lg-4">
           <div class="thumbnail">
-            <div class = "insta-thumb">       
+            <div class = "insta-thumb">    
 
               <%= render :inline => supercar.html.html_safe %>
             </div>
             <div class="caption">
             <div id="thumbnail-left-info" >
-               <h3>City:</h3>  
+               <h3>City:</h3>
+               <%= supercar.city.name %>  
               <h3>Country:</h3>
+              <%= supercar.country.name %>
               <% if supercar.user %>
                   <h3>Spotted by:</h3>
                   <p><%= supercar.user.username %></p>
-                <% else %>
+<!--                   <p><%= supercar.author_name%></p>
+ -->                <% else %>
               <% end %>
             </div>
             <div id="thumbnail-right-info">              

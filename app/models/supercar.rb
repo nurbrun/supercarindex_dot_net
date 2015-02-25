@@ -7,7 +7,7 @@ class Supercar < ActiveRecord::Base
 	
 	belongs_to :user
 
-	# before_validation :https_to_http_protocol
+	before_validation :https_to_http_protocol
 	before_validation :save_oembed_json_to_record
 	validates_presence_of :supercar_url, :on => :create	
 	validates_format_of :supercar_url, :with => /instagram\.com\/p\/*/
@@ -26,11 +26,10 @@ self.thumbnail_url = resource.thumbnail_url
 self.title = resource.title
 end
 
-# def https_to_http_protocol
-#   if supercar_url[/\Ahttps:\/\//]
-#   	self.supercar_url = supercar_url.gsub(/\Ahttps:/, "http:")
-#     # self.img_url = "http://#{self.img_url}"
-#   end
-# end
+def https_to_http_protocol
+  if supercar_url[/\Ahttps:\/\//]
+  	self.supercar_url = supercar_url.gsub(/\Ahttps:/, "http:")
+  end
+end
 
 end

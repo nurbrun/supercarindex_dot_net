@@ -1,0 +1,5 @@
+<h1>All Cities</h1>
+
+<% @cities.each do |city| %>
+	<p><%= link_to city.name, by_makes_path(city.name) %></p>
+<% end %>
