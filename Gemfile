@@ -64,3 +64,4 @@ end
 gem 'ruby-oembed'
 gem 'will_paginate-bootstrap'
 gem "select2-rails"
+gem 'jquery-turbolinks'
