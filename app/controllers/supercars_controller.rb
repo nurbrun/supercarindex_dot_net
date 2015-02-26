@@ -2,6 +2,10 @@ class SupercarsController < ApplicationController
 
 	def index	 
 		@supercars = Supercar.all
+		@make = Make.order('name asc').all
+		@car_model = CarModel.order('name asc').all
+		@city = City.order('name asc').all
+		@country = Country.order('name asc').all
 	end
 
 	def new

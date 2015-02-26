@@ -49,55 +49,14 @@
     </table>
     </div>
     </div>
-    <div class="index-ad-space" style="display:inline-block;width:30%;float:right;">
+    <div class="index-ad-space" style="display:inline-block;width:40%;float:right;">
     <br>
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="input-group">        
-            <input type="text" class="form-control" placeholder="Search for Manufacturer...">
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="button">Go!</button>
-            </span>
-          </div><!-- /input-group -->
-        </div><!-- /.col-lg-6 -->
-      </div>
-      <br>
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for Model...">
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="button">Go!</button>
-            </span>
-          </div><!-- /input-group -->
-        </div><!-- /.col-lg-6 -->
-      </div>
-      <br>
-       <div class="row">
-        <div class="col-lg-12">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for City...">
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="button">Go!</button>
-            </span>
-          </div><!-- /input-group -->
-        </div><!-- /.col-lg-6 -->
-      </div>
-      <br>
-       <div class="row">
-        <div class="col-lg-12">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for Country...">
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="button">Go!</button>
-            </span>
-          </div><!-- /input-group -->
-        </div><!-- /.col-lg-6 -->
-      </div>
-      <div style="text-align: right;">
-      </div>
-    </div>
-  
+    <%= select_tag "make-placeholder", options_from_collection_for_select(@make, "id", "name"), include_blank: true, id: "manufacturer-search" %>
+    <%= select_tag "car_model-placeholder", options_from_collection_for_select(@car_model, "id", "name"), include_blank: true, id: "model-search" %>
+    <%= select_tag "city-placeholder", options_from_collection_for_select(@city, "id", "name"), include_blank: true, id: "city-search" %>
+    <%= select_tag "country-placeholder", options_from_collection_for_select(@country, "id", "name"), include_blank: true, id: "country-search" %>
+
+  </div>
   </div><!-- /.inex-top-container -->
 
 <br>
