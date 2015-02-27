@@ -15,7 +15,7 @@ gem 'bcrypt', '3.1.9'
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 # Kaminari: https://github.com/amatsuda/kaminari
-gem 'kaminari', '0.16.2'
+# gem 'kaminari', '0.16.2'
 
 # Friendly_id: https://github.com/norman/friendly_id
 gem 'friendly_id', '5.1.0'

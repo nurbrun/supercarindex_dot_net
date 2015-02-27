@@ -1,11 +1,19 @@
 class SupercarsController < ApplicationController
 
-	def index	 
+	def index
+		
 		@supercars = Supercar.all.paginate(:page => params[:page], :per_page => 9).order("created_at DESC")
 		@make = Make.order('name asc').all
 		@car_model = CarModel.order('name asc').all
 		@city = City.order('name asc').all
 		@country = Country.order('name asc').all
+
+		if params[:supercar_fields]
+	      @supercars = search
+	    else
+
+    end
+
 	end
 
 	def new
@@ -16,6 +24,71 @@ class SupercarsController < ApplicationController
 		@supercar.country = Country.new
 		# @supercar.spot_type = SpotType.new
 	end
+
+	def search
+    search_params
+    sanitized_search = search_params.delete_if { |k,v| v.blank? }
+    # query = Card.all
+    supercar_query = Supercar.all
+    make_query = Make.all
+    model_query = CarModel.all
+    city_query = City.all
+    country_query = Country.all
+    sanitized_search.each do |key, value|
+
+      if key == "make"
+        if Make.where(["name iLIKE ?", "%#{value}%"]).first == nil
+          make_query = []
+          # query = [query, subtype_query].inject(&:&)      
+          query = query.merge(make_query)
+        else
+          make_query = Make.where(["name iLIKE ?", "%#{value}%"]).first.supercars
+          # query = [query, card_type_query].inject(&:&)
+          query = query.merge(make_query)
+        end
+      end
+      if key == "car_model"
+        if CarModel.where(["name iLIKE ?", "%#{value}%"]).first == nil
+          car_model_query = []
+          # query = [query, subtype_query].inject(&:&)      
+          query = query.merge(car_model_query)
+        else
+          car_model_query = CarModel.where(["name iLIKE ?", "%#{value}%"]).first.supercars
+          # query = [query, card_type_query].inject(&:&)
+          query = query.merge(car_model_query)
+        end
+      end
+      if key == "city"
+        if City.where(["name iLIKE ?", "%#{value}%"]).first == nil
+          city_query = []
+          # query = [query, subtype_query].inject(&:&)      
+          query = query.merge(city_query)
+        else
+          city_query = City.where(["name iLIKE ?", "%#{value}%"]).first.supercars
+          # query = [query, card_type_query].inject(&:&)
+          query = query.merge(city_query)
+        end
+      end
+      if key == "country"
+        if Country.where(["name iLIKE ?", "%#{value}%"]).first == nil
+          country_query = []
+          # query = [query, subtype_query].inject(&:&)      
+          query = query.merge(country_query)
+        else
+          country_query = Country.where(["name iLIKE ?", "%#{value}%"]).first.supercars
+          # query = [query, card_type_query].inject(&:&)
+          query = query.merge(country_query)
+        end
+      end    
+
+    end
+    # convert query back into Active Record object 
+    # if query.class == Array    
+    #   query = Card.where(id: query.map(&:id))
+    # end
+
+    query.page(params[:page])
+  end
 
 	# def show
 	# 	@supercar = Supercar.find(params[:id])
@@ -96,104 +169,10 @@ end
 	 # params.require(:spot_type).permit(:name, :tag_list)
 	end
 
+	def search_params
+    	params.require(:supercar_fields).permit(:make, :car_model, :city, :country)
+  	end
+
+
 	end
 
-# def search
-#     search_params
-#     sanitized_search = search_params.delete_if { |k,v| v.blank? }
-#     # query = Card.all
-#     supercar_query = Supercar.all
-#     make_query = Make.all
-#     model_query = CarModel.all
-#     city_query = City.all
-#     country_query = Country.all
-#     sanitized_search.each do |key, value|
-
-#       if key == "name" || key == "artist"
-#         # if query.class == Array
-#         #   query = Card.where(id: query.map(&:id))
-#         # end
-#         query = query.where(["#{key} iLIKE ?", "%#{value}%"])
-#       end
-
-#       if key == "card_set" && value != "All"
-#         card_set_query = CardSet.where(["name iLIKE ?", "%#{value}%"]).first.cards
-#         query = query.merge(card_set_query)
-#         # query = [query, card_set_query].inject(&:&)
-#       end
-
-#       if key == "cmc"
-#         num = value.to_i
-#         cmcmod = sanitized_search[:cmcmod]
-#         # if query.class == Array
-#         #   query = Card.where(id: query.map(&:id))
-#         # end
-#         query = query.where("#{key} #{cmcmod} ?", num)
-#       end
-
-#       if key == "card_type"
-#         if CardType.where(["name iLIKE ?", "%#{value}%"]).first == nil
-#           card_type_query = []
-#           # query = [query, subtype_query].inject(&:&)      
-#           query = query.merge(card_type_query)
-#         else
-#           card_type_query = CardType.where(["name iLIKE ?", "%#{value}%"]).first.cards
-#           # query = [query, card_type_query].inject(&:&)
-#           query = query.merge(card_type_query)
-#         end
-#       end
-
-#       if key == "subtypes"
-#         values = value.gsub(/\s+/, "").split(",")
-#         subtype_query = []
-#         values.each do |subtype|
-#           if Subtype.where(["name iLIKE ?", "%#{subtype}%"]).first == nil
-#             subtype_query = []
-#             # query = [query, subtype_query].inject(&:&)
-#             query = query.merge(subtype_query)
-#           else
-#             subtype_query = Subtype.where(["name iLIKE ?", "%#{subtype}%"]).first.cards
-#             # query = [query, subtype_query].inject(&:&)
-#             query = query.merge(subtype_query)
-#           end
-#         end
-#       end
-
-#       if key == "white" && value == "1"
-#         color_query = Color.where(name: "White").first.cards
-#         # query = [query, color_query].inject(&:&)
-#         query = query.merge(color_query)
-#       end
-
-#       if key == "blue" && value == "1"
-#         color_query = Color.where(name: "Blue").first.cards
-#         # query = [query, color_query].inject(&:&)
-#         query = query.merge(color_query)
-#       end
-
-#       if key == "black" && value == "1"
-#         color_query = Color.where(name: "Black").first.cards
-#         # query = [query, color_query].inject(&:&)
-#         query = query.merge(color_query)
-#       end
-
-#       if key == "red" && value == "1"
-#         color_query = Color.where(name: "Red").first.cards
-#         # query = [query, color_query].inject(&:&)
-#         query = query.merge(color_query)
-#       end
-
-#       if key == "green" && value == "1"
-#         color_query = Color.where(name: "Green").first.cards
-#         # query = [query, color_query].inject(&:&)
-#         query = query.merge(color_query)
-#       end
-
-#     end
-#     # convert query back into Active Record object 
-#     # if query.class == Array    
-#     #   query = Card.where(id: query.map(&:id))
-#     # end
-
-#     query.page(params[:page])
-#   end

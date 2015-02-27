@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   # , :confirmable
 
   # Pagination
-  paginates_per 100
+  # paginates_per 100
 
   # Validations
   # :username
