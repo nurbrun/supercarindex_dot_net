@@ -13,7 +13,7 @@
         <th><h3>Model</h3></th>
         <th><h3>City</h3></th>
         <th><h3>Country</h3></th>
-        <th><h3>Spotted By</h3></th>
+        <th><h3>Indexed By</h3></th>
       </tr>
       <% @supercars.each do |supercar| %>
         <tr>
@@ -40,7 +40,7 @@
             </td>
           <td> 
             <% if supercar.user %>
-              <%= supercar.user.username %>
+              <%= link_to supercar.user.username, user_path(supercar.user.username) %>
             <% else %>
             <% end %>
           </td>

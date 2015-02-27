@@ -1,4 +1,10 @@
 class User < ActiveRecord::Base
+  has_many :supercars
+
+
+    def to_param
+      username
+    end
   # Use friendly_id on Users
   extend FriendlyId
   friendly_id :friendify, use: :slugged

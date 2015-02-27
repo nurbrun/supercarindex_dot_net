@@ -2,6 +2,9 @@ SupercarindexDotNet::Application.routes.draw do
   root "pages#home"
   get "home", to: "pages#home", as: "home"
   get "inside", to: "pages#inside", as: "inside"
+
+  get "users", to: "users#index", as: "users"
+  get "user/:id", to: "users#show", as: "user"
   
   resources :supercars
   # resources :makes
