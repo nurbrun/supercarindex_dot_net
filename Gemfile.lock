@@ -228,4 +228,5 @@ DEPENDENCIES
   uglifier (= 2.6.0)
   unicorn
   web-console (= 2.0.0)
+  will_paginate
   will_paginate-bootstrap

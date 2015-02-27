@@ -15,7 +15,7 @@
         <th><h3>Country</h3></th>
         <th><h3>Spotted By</h3></th>
       </tr>
-      <% @supercars.reverse.each do |supercar| %>
+      <% @supercars.each do |supercar| %>
         <tr>
           <td>
             <h5>
@@ -51,18 +51,30 @@
     </div>
     <div class="index-ad-space" style="display:inline-block;width:40%;float:right;">
     <br>
-    <%= select_tag "make-placeholder", options_from_collection_for_select(@make, "id", "name"), include_blank: true, id: "manufacturer-search" %>
-    <%= select_tag "car_model-placeholder", options_from_collection_for_select(@car_model, "id", "name"), include_blank: true, id: "model-search" %>
-    <%= select_tag "city-placeholder", options_from_collection_for_select(@city, "id", "name"), include_blank: true, id: "city-search" %>
-    <%= select_tag "country-placeholder", options_from_collection_for_select(@country, "id", "name"), include_blank: true, id: "country-search" %>
+    <%= form_tag("/supercars", method: "get") do %>
+
+      <div><%= select_tag "Manufacturer", options_from_collection_for_select(@make, "id", "name"), include_blank: true, id: "manufacturer-search" %></div>
+      </br>
+      <div><%= select_tag "Model", options_from_collection_for_select(@car_model, "id", "name"), include_blank: true, id: "model-search" %></div>
+      </br>
+      <div><%= select_tag "City", options_from_collection_for_select(@city, "id", "name"), include_blank: true, id: "city-search" %></div>
+      </br>
+      <div><%= select_tag "Country", options_from_collection_for_select(@country, "id", "name"), include_blank: true, id: "country-search" %></div>
+  
+            <div class ="input", id = "boxes">
+              <br><%= submit_tag "Search", id: "card-search-submit-button" %>
+            </div>          
+      <% end %>
+       <div style="float:right;"> <%= will_paginate @supercars, renderer: BootstrapPagination::Rails %>  </div>
 
   </div>
+
   </div><!-- /.inex-top-container -->
 
 <br>
 
 <div class="container" id="tourpackages-carousel">
-  <% @supercars.reverse.each_slice(3).each do |group| %>
+  <% @supercars.each_slice(3).each do |group| %>
       <div class="row">
       <% group.each do |supercar| %>
         <div id ="thumb-grid" class="col-xs-18 col-sm-6 col-m-4 col-lg-4">
@@ -73,9 +85,13 @@
             <div class="caption">
             <div id="thumbnail-left-info" >
                <h3>City:</h3>
+               <h5>
             <p><%= link_to supercar.city.name, city_path(supercar.city) %></p>
+            </h5>
               <h3>Country:</h3>
+              <h5>
             <p><%= link_to supercar.country.name, country_path(supercar.country) %></p>
+            </h5>
               <% if supercar.user %>
                   <h3>Spotted by:</h3>
                   <p><%= supercar.user.username %></p>
@@ -85,9 +101,9 @@
             </div>
             <div id="thumbnail-right-info">              
               <h3>Manufacturer:</h3>       
-              
+              <h5>
             <p><%= link_to supercar.make.name, make_path(supercar.make) %></p>
-              
+              </h5>
               <h3>Model:</h3>
 
               <h5>
@@ -106,3 +122,4 @@
   <div style="text-align: right;"> 
   </div>  
 </div><!-- End container -->
+       <div style="float:right;"> <%= will_paginate @supercars, renderer: BootstrapPagination::Rails %>  </div>
