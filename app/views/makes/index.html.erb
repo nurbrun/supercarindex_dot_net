@@ -3,3 +3,11 @@
 <% @makes.each do |make| %>
 	<p><%= link_to make.name, make_path(make) %></p>
 <% end %>
+
+<% @makes.each do |make| %>
+	<%= make.name %>
+	<% make.supercars.uniq.each do |supercar| %>
+	<%= supercar.car_model.name %>
+	<% end %>
+	<% end %>
+

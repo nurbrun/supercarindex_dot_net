@@ -1,3 +1,113 @@
-<% @user.supercars.each do |supercar| %>
-<%= supercar.html.html_safe %>
-<% end %>
+<h2>All Supercars Indexed by:</h2>
+<h3><%= @user.username %></h3>
+<br>
+
+<h4>Most Recently Indexed</h4>
+<br>
+
+<div class="index-top-container">
+ <div class="index-top-left-list" style="display:inline-block;">
+ <div class = "table-responsive" >
+    <table class="table table-striped table-condensed table-bordered table-hover">
+      <tr>
+        <th><h3>Make</h3></th>
+        <th><h3>Model</h3></th>
+        <th><h3>City</h3></th>
+        <th><h3>Country</h3></th>
+        <th><h3>Indexed By</h3></th>
+      </tr>
+      <% @supercars_by_user.each do |supercar| %>
+        <tr>
+          <td>
+            <h5>
+            <p><%= link_to supercar.make.name, make_path(supercar.make) %></p> 
+            </h5>
+          </td>
+          <td>
+          <h5>
+            <p><%= link_to supercar.car_model.name, car_model_path(supercar.car_model) %></p>
+            </h5>
+            </td>
+                      <td>
+          <h5>
+            <p><%= link_to supercar.city.name, city_path(supercar.city) %></p>
+            </h5>
+            </td>
+                      <td>
+          <h5>
+            <p><%= link_to supercar.country.name, country_path(supercar.country) %></p>
+            </h5>
+            </td>
+          <td> 
+            <% if supercar.user %>
+              <%= link_to supercar.user.username, user_path(supercar.user.username) %>
+            <% else %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+    </div>
+          <div><%= page_entries_info @supercars_by_user %></div>
+          <br>
+    </div>
+    <br>
+    <div class="index-ad-space" style="display:inline-block;width:40%;float:right;">
+       <div style="float:right;"> <%= will_paginate @supercars_by_user, renderer: BootstrapPagination::Rails %>  </div>    
+    </div>          
+  </div>
+
+  </div><!-- /.inex-top-container -->
+
+<br>
+
+<div class="container" id="tourpackages-carousel">
+  <% @supercars_by_user.each_slice(3).each do |group| %>
+      <div class="row">
+      <% group.each do |supercar| %>
+        <div id ="thumb-grid" class="col-xs-18 col-sm-6 col-m-4 col-lg-4">
+          <div class="thumbnail">
+            <div class = "insta-thumb">    
+              <%= render :inline => supercar.html.html_safe %>
+            </div>
+            <div class="caption">
+            <div id="thumbnail-left-info" >
+               <h3>City:</h3>
+               <h5>
+            <p><%= link_to supercar.city.name, city_path(supercar.city) %></p>
+            </h5>
+              <h3>Country:</h3>
+              <h5>
+            <p><%= link_to supercar.country.name, country_path(supercar.country) %></p>
+            </h5>
+              <% if supercar.user %>
+                  <h3>Spotted by:</h3>
+                  <p><%= supercar.user.username %></p>
+<!--                   <p><%= supercar.author_name%></p>
+ -->                <% else %>
+              <% end %>
+            </div>
+            <div id="thumbnail-right-info">              
+              <h3>Manufacturer:</h3>       
+              <h5>
+            <p><%= link_to supercar.make.name, make_path(supercar.make) %></p>
+              </h5>
+              <h3>Model:</h3>
+
+              <h5>
+            <p><%= link_to supercar.car_model.name, car_model_path(supercar.car_model) %></p>
+
+              </h5> 
+            </div>          
+             
+                                                           
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div><!-- End row -->
+  <% end %>
+  <div style="text-align: right;"> 
+  </div>  
+</div><!-- End container -->
+       <div style="float:right;"> <%= will_paginate @supercars_by_user, renderer: BootstrapPagination::Rails %>  </div>
