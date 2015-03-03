@@ -15,7 +15,10 @@ class MakesController < ApplicationController
 
 	def index
 		@makes = Make.all
+		# @supercars_by_make = @makes.supercars
+
 	end
+
 
 	def show
 		@make = Make.find_by_name(params[:id])

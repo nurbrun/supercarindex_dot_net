@@ -37,6 +37,10 @@ group :development, :test do
   gem 'spring', '1.2.0'
 end
 
+group :development do
+  gem "better_errors"
+end
+
 
 # SQLite 3
 group :development, :test do

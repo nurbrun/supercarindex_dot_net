@@ -14,7 +14,7 @@
         <th><h3>Model</h3></th>
         <th><h3>City</h3></th>
         <th><h3>Country</h3></th>
-        <th><h3>Indexed By</h3></th>
+        <th><h3>Index Date</h3></th>
       </tr>
       <% @supercars_by_user.each do |supercar| %>
         <tr>
@@ -39,10 +39,9 @@
             </h5>
             </td>
           <td> 
-            <% if supercar.user %>
-              <%= link_to supercar.user.username, user_path(supercar.user.username) %>
-            <% else %>
-            <% end %>
+            <h5>
+            	<p><%= supercar.created_at.strftime('%B'' ''%d' ', ' '%Y') %></p>
+            </h5>
           </td>
         </tr>
       <% end %>
