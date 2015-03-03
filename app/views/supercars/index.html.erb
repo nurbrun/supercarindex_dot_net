@@ -11,6 +11,7 @@
           <th><h3>Model</h3></th>
           <th><h3>City</h3></th>
           <th><h3>Country</h3></th>
+          <th><h3>Index Date</h3></th>
           <th><h3>Indexed By</h3></th>
         </tr>
         <% @supercars.each do |supercar| %>
@@ -36,6 +37,13 @@
               <p><%= link_to supercar.country.name, country_path(supercar.country) %></p>
               </h5>
               </td>
+              <td>
+                <h5>
+                  <p>
+                    <%= supercar.created_at.strftime('%B'' ''%d' ', ' '%Y') %>
+                  </p>
+                </h5>
+              </td>
             <td> 
               <% if supercar.user %>
                 <%= link_to supercar.user.username, user_path(supercar.user.username) %>
@@ -50,7 +58,7 @@
 
     </div>
   </div>
-  <div class="index-ad-space" style="display:inline-block;width:40%;float:right;">
+  <div class="index-ad-space" style="display:inline-block;width:24%;float:right;">
     <%= form_tag("/supercars", method: "get") do %>
       <div><%= select_tag "Manufacturer", options_from_collection_for_select(@make, "id", "name"), include_blank: true, id: "manufacturer-search" %></div>
       <br>
@@ -76,7 +84,9 @@
       <% group.each do |supercar| %>
         <div id ="thumb-grid" class="col-xs-18 col-sm-6 col-m-4 col-lg-4">
           <div class="thumbnail">
-            <div class = "insta-thumb">    
+            <div class = "insta-thumb">
+              <h4><%= supercar.make.name %> <%= supercar.car_model.name %></h4>
+              <h4><%= supercar.city.name %>, <%= supercar.country.name =%></h4>    
               <%= render :inline => supercar.html.html_safe %>
             </div>
             <div class="caption">
