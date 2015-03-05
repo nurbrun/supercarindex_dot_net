@@ -10,7 +10,7 @@ class Admin::SupercarsController < Admin::BaseController
 
   def index
     # @supercars = Supercar.search_and_order(params[:search], params[:page])
-     @supercars = Supercar.all.paginate(:page => params[:page], :per_page => 9).order("created_at DESC")
+     @supercars = Supercar.all
   end
 
   def show

@@ -1,4 +1,4 @@
-<h2>All Supercars Indexed by:</h2>
+ <h2>All Supercars Indexed by:</h2>
 <h3><%= @user.username %></h3>
 <br>
 
@@ -16,7 +16,13 @@
         <th><h3>Country</h3></th>
         <th><h3>Index Date</h3></th>
       </tr>
-      <% @supercars_by_user.each do |supercar| %>
+
+
+
+<!-- 
+<%= "#{pluralize(@supercars_by_user.select("distinct make_id").where(:make_id => "2").count, 'supercar')}" %>
+
+ -->      <% @supercars_by_user.each do |supercar| %>
         <tr>
           <td>
             <h5>
@@ -50,12 +56,21 @@
           <div><%= page_entries_info @supercars_by_user %></div>
           <br>
     </div>
-    <br>
     <div class="index-ad-space" style="display:inline-block;width:40%;float:right;">
-       <div style="float:right;"> <%= will_paginate @supercars_by_user, renderer: BootstrapPagination::Rails %>  </div>    
-    </div>          
-  </div>
+      <div class="user-supercar-info" style="display:inline-block;">
 
+        <% @supercars_by_user_no_page.select("distinct make_id").each do |make| %>
+        <h5><%= make.make.name %></h5>
+        <% @supercars_by_user_no_page.where(:make_id => "#{make.make.id}").select("distinct car_model_id").each do |supercar| %>
+        <p><%= @supercars_by_user_no_page.where(:car_model_id => "#{supercar.car_model.id}").count %> <%= supercar.car_model.name %></p>
+        <% end %>
+        <% end %>
+
+      </div>
+      <div style="float:right;"> <%= will_paginate @supercars_by_user, renderer: BootstrapPagination::Rails %>  </div>    
+    </div>          
+
+  </div>
   </div><!-- /.inex-top-container -->
 
 <br>

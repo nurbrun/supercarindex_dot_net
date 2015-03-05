@@ -21,8 +21,8 @@
         </tr>
         <% @supercars.each do |supercar| %>
           <tr>
-          	<td style = "width: 30%;">
-			   <img src="<%= supercar.thumbnail_url %>" style = "width: 30%; float:right;"/>        	 
+          	<td>
+			   <img src="<%= supercar.thumbnail_url %>" style = "width: 38%; float:right;"/>        	 
           	</td>
             <td>
               <h5>
@@ -63,9 +63,6 @@
           
         <% end %>
       </table>
-        <div style="display:inline-block;"><%= page_entries_info @supercars %></div>
-        <div style="float:right;display:inline-block;"> <%= will_paginate @supercars, renderer: BootstrapPagination::Rails %></div>
-
     </div>
   </div>
   </div>
