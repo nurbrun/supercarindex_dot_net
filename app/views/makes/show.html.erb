@@ -13,6 +13,7 @@
         <th><h3>Model</h3></th>
         <th><h3>City</h3></th>
         <th><h3>Country</h3></th>
+        <th><h3>Index Date</h3></th>
         <th><h3>Indexed By</h3></th>
       </tr>
       <% @supercars_by_make.each do |supercar| %>
@@ -38,6 +39,11 @@
             <p><%= link_to supercar.country.name, country_path(supercar.country) %></p>
             </h5>
             </td>
+          <td>
+            <p>
+              <%= supercar.created_at.strftime('%B'' ''%d' ', ' '%Y') %>
+            </p>
+          </td>
           <td> 
             <% if supercar.user %>
               <%= link_to supercar.user.username, user_path(supercar.user.username) %>
@@ -67,37 +73,31 @@
       <% group.each do |supercar| %>
         <div id ="thumb-grid" class="col-xs-18 col-sm-6 col-m-4 col-lg-4">
           <div class="thumbnail">
-            <div class = "insta-thumb">    
+            <div class = "insta-thumb">
+              <div style="margin-left:5px;">
+                <h4>
+                  <%= link_to supercar.make.name, make_path(supercar.make) %> <%= link_to supercar.car_model.name, car_model_path(supercar.car_model) %>
+                </h4>
+              </div>
+            <div style="margin-left:10px;">
+              <h5>
+                <%= link_to supercar.city.name, city_path(supercar.city) %>, <%= link_to supercar.country.name, country_path(supercar.country) %>
+              </h5>
+            </div> 
+            <br>    
               <%= render :inline => supercar.html.html_safe %>
             </div>
             <div class="caption">
             <div id="thumbnail-left-info" >
-               <h3>City:</h3>
-               <h5>
-            <p><%= link_to supercar.city.name, city_path(supercar.city) %></p>
-            </h5>
-              <h3>Country:</h3>
-              <h5>
-            <p><%= link_to supercar.country.name, country_path(supercar.country) %></p>
-            </h5>
-              <% if supercar.user %>
-                  <h3>Spotted by:</h3>
-                  <p><%= supercar.user.username %></p>
+               <% if supercar.user %>
+                  <h3>Indexed by:</h3>
+                  <p><%= link_to supercar.user.username, user_path(supercar.user.username) %></p>
 <!--                   <p><%= supercar.author_name%></p>
  -->                <% else %>
               <% end %>
             </div>
             <div id="thumbnail-right-info">              
-              <h3>Manufacturer:</h3>       
-              <h5>
-            <p><%= link_to supercar.make.name, make_path(supercar.make) %></p>
-              </h5>
-              <h3>Model:</h3>
-
-              <h5>
-            <p><%= link_to supercar.car_model.name, car_model_path(supercar.car_model) %></p>
-
-              </h5> 
+              
             </div>          
              
                                                            

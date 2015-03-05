@@ -22,16 +22,19 @@
       <% group.each do |supercar| %>
         <div id ="thumb-grid" class="col-xs-18 col-sm-6 col-m-4 col-lg-4">
           <div class="thumbnail">
-           
+			<div class="image-cropper" position="relative" style = "position: relative; height: 260px; overflow: hidden;">
+			   <img class="bottom-centered" src="<%= supercar.supercars.last.thumbnail_url %>" style = "position: absolute; bottom: 0;"/>        	 
+			</div>         
             <div class="caption">
             <div id="manufacturer-title" >
                
-               <h4><%= supercar.name %></h4>
+               <div style = "border-bottom: 1px solid #EFEEEE;"><h3><%= link_to supercar.name, make_path(supercar.name) %></h3></div>
+               <br>
               
             </div>
             <div id="manufacturer-car-models">              
 				<% supercar.supercars.select("distinct car_model_id").order('created_at ASC').each do |car_model| %>
-					<p><%= car_model.car_model.name %></p>
+					<p><%= link_to car_model.car_model.name, car_model_path(car_model.car_model.name) %></p>
              	<% end %>
             </div> 
              
@@ -45,3 +48,4 @@
   <div style="text-align: right;"> 
   </div>  
 </div><!-- End container -->
+

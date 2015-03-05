@@ -1,5 +1,47 @@
-<h1>All Manufactures</h1>
-
+<h1>All Cities</h1>
+<!-- 
 <% @cities.each do |city| %>
 	<p><%= link_to city.name, city_path(city) %></p>
 <% end %>
+
+ -->
+<br>
+<div class="container" id="tourpackages-carousel">
+  <% @cities.order('name ASC').each_slice(3).each do |group| %>
+      <div class="row">
+      <% group.each do |city| %>
+        <div id ="thumb-grid" class="col-xs-18 col-sm-6 col-m-4 col-lg-4">
+          <div class="thumbnail">
+			<div class="image-cropper" position="relative" style = "position: relative; height: 260px; overflow: hidden;">
+			   <img class="bottom-centered" src="<%= city.supercars.last.thumbnail_url %>" style = "position: absolute; bottom: 0;"/>        	 
+			</div>         
+            <div class="caption">
+            <div id="manufacturer-title" >               
+               <div >
+               	<h3><%= link_to city.name, city_path(city.name) %></h3>
+               </div>
+               <br>              
+            </div>
+            <div id="manufacturer-car-models">
+              <% city.supercars.select("distinct make_id").order('created_at ASC').each do |supercar| %>
+              	<div style = "border-bottom: 1px solid #EFEEEE;">
+	              	<h4>
+	              		<%= link_to supercar.make.name, make_path(supercar.make.name) %>
+	              	</h4>
+              	</div>
+              	<br>
+				<% supercar.make.supercars.where(city_id: city.id).select("distinct car_model_id").order('created_at ASC').each do |car_model| %>
+					<p><%= link_to car_model.car_model.name, car_model_path(car_model.car_model.name) %></p>
+             	<% end %>
+             	 <br>
+             <% end %>
+            </div>             
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div><!-- End row -->
+  <% end %>
+  <div style="text-align: right;"> 
+  </div>  
+</div><!-- End container -->
