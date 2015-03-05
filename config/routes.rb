@@ -30,6 +30,7 @@ SupercarindexDotNet::Application.routes.draw do
   namespace :admin do
     root "base#index"
     resources :users
+    resources :supercars
     
   end
 

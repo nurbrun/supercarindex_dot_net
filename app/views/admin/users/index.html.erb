@@ -4,7 +4,7 @@
 
 <div class="text-center">
   <p><%= page_entries_info @users %></p>
-  <%= paginate @users %>
+  <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
 </div>
 
 <%= form_tag admin_users_path, method: 'get', html: {role: "form"} do %>
@@ -52,5 +52,5 @@
 
 <div class="text-center">
   <p><%= page_entries_info @users %></p>
-  <%= paginate @users %>
+  <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
 </div>
