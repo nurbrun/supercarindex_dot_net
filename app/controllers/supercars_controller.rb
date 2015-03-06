@@ -26,77 +26,81 @@ class SupercarsController < ApplicationController
 	end
 
 	# def search
- #    search_params
- #    sanitized_search = search_params.delete_if { |k,v| v.blank? }
- #    # query = Card.all
- #    supercar_query = Supercar.all
- #    make_query = Make.all
- #    model_query = CarModel.all
- #    city_query = City.all
- #    country_query = Country.all
- #    sanitized_search.each do |key, value|
+	#   @makes = Make.search params[:search]
+	# end
 
- #      if key == "make"
- #        if Make.where(["name iLIKE ?", "%#{value}%"]).first == nil
- #          make_query = []
- #          # query = [query, subtype_query].inject(&:&)      
- #          query = query.merge(make_query)
- #        else
- #          make_query = Make.where(["name iLIKE ?", "%#{value}%"]).first.supercars
- #          # query = [query, card_type_query].inject(&:&)
- #          query = query.merge(make_query)
- #        end
- #      end
- #      if key == "car_model"
- #        if CarModel.where(["name iLIKE ?", "%#{value}%"]).first == nil
- #          car_model_query = []
- #          # query = [query, subtype_query].inject(&:&)      
- #          query = query.merge(car_model_query)
- #        else
- #          car_model_query = CarModel.where(["name iLIKE ?", "%#{value}%"]).first.supercars
- #          # query = [query, card_type_query].inject(&:&)
- #          query = query.merge(car_model_query)
- #        end
- #      end
- #      if key == "city"
- #        if City.where(["name iLIKE ?", "%#{value}%"]).first == nil
- #          city_query = []
- #          # query = [query, subtype_query].inject(&:&)      
- #          query = query.merge(city_query)
- #        else
- #          city_query = City.where(["name iLIKE ?", "%#{value}%"]).first.supercars
- #          # query = [query, card_type_query].inject(&:&)
- #          query = query.merge(city_query)
- #        end
- #      end
- #      if key == "country"
- #        if Country.where(["name iLIKE ?", "%#{value}%"]).first == nil
- #          country_query = []
- #          # query = [query, subtype_query].inject(&:&)      
- #          query = query.merge(country_query)
- #        else
- #          country_query = Country.where(["name iLIKE ?", "%#{value}%"]).first.supercars
- #          # query = [query, card_type_query].inject(&:&)
- #          query = query.merge(country_query)
- #        end
- #      end    
+	def search
+    search_params
+    sanitized_search = search_params.delete_if { |k,v| v.blank? }
+    # query = Card.all
+    supercar_query = Supercar.all
+    make_query = Make.all
+    model_query = CarModel.all
+    city_query = City.all
+    country_query = Country.all
+    sanitized_search.each do |key, value|
 
- #    end
- #    # convert query back into Active Record object 
- #    # if query.class == Array    
- #    #   query = Card.where(id: query.map(&:id))
- #    # end
+      if key == "make"
+        if Make.where(["name iLIKE ?", "%#{value}%"]).first == nil
+          make_query = []
+          # query = [query, subtype_query].inject(&:&)      
+          query = query.merge(make_query)
+        else
+          make_query = Make.where(["name iLIKE ?", "%#{value}%"]).first.supercars
+          # query = [query, card_type_query].inject(&:&)
+          query = query.merge(make_query)
+        end
+      end
+      if key == "car_model"
+        if CarModel.where(["name iLIKE ?", "%#{value}%"]).first == nil
+          car_model_query = []
+          # query = [query, subtype_query].inject(&:&)      
+          query = query.merge(car_model_query)
+        else
+          car_model_query = CarModel.where(["name iLIKE ?", "%#{value}%"]).first.supercars
+          # query = [query, card_type_query].inject(&:&)
+          query = query.merge(car_model_query)
+        end
+      end
+      if key == "city"
+        if City.where(["name iLIKE ?", "%#{value}%"]).first == nil
+          city_query = []
+          # query = [query, subtype_query].inject(&:&)      
+          query = query.merge(city_query)
+        else
+          city_query = City.where(["name iLIKE ?", "%#{value}%"]).first.supercars
+          # query = [query, card_type_query].inject(&:&)
+          query = query.merge(city_query)
+        end
+      end
+      if key == "country"
+        if Country.where(["name iLIKE ?", "%#{value}%"]).first == nil
+          country_query = []
+          # query = [query, subtype_query].inject(&:&)      
+          query = query.merge(country_query)
+        else
+          country_query = Country.where(["name iLIKE ?", "%#{value}%"]).first.supercars
+          # query = [query, card_type_query].inject(&:&)
+          query = query.merge(country_query)
+        end
+      end    
 
- #    query.page(params[:page])
- #  end
+    end
+    # convert query back into Active Record object 
+    # if query.class == Array    
+    #   query = Card.where(id: query.map(&:id))
+    # end
 
-	# # def show
-	# # 	@supercar = Supercar.find(params[:id])
+    query.page(params[:page])
+  end
 
-	# # 	if current_user
+	# def show
+	# 	@supercar = Supercar.find(params[:id])
+
+	# 	if current_user
 			
-	# # 	end
-	# # end
+	# 	end
+	# end
 
 	def edit
   		@supercar = Supercar.find(params[:id])

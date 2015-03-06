@@ -25,6 +25,10 @@ class MakesController < ApplicationController
 		@supercars_by_make = @make.supercars.paginate(:page => params[:page], :per_page => 6).order("created_at DESC")	
 	end
 
+	def search
+	  @makes = Make.search params[:search]
+	end
+
 	
 
   # def tag_cloud
