@@ -2,7 +2,7 @@ class SupercarsController < ApplicationController
 
 	def index
 		
-		@supercars = Supercar.all.paginate(:page => params[:page], :per_page => 9).order("created_at DESC")
+		@supercars = Supercar.all.paginate(:page => params[:page], :per_page => 6).order("created_at DESC")
 		@make = Make.order('name asc').all
 		@car_model = CarModel.order('name asc').all
 		@city = City.order('name asc').all
@@ -23,6 +23,10 @@ class SupercarsController < ApplicationController
 		@supercar.city = City.new
 		@supercar.country = Country.new
 		# @supercar.spot_type = SpotType.new
+	end
+
+	def show
+		@supercar = Supercar.find(params[:id])
 	end
 
 	# def search

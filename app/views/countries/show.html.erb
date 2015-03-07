@@ -15,6 +15,7 @@
         <th><h3>Country</h3></th>
         <th><h3>Index Date</h3></th>
         <th><h3>Indexed By</h3></th>
+        <th></th>
       <% @supercars_by_country.each do |supercar| %>
         <tr>
           <td>
@@ -49,6 +50,9 @@
             <% else %>
             <% end %>
           </td>
+          <td>
+              <p><%= link_to "visit supercar page", supercar_path(supercar.id) %></p>
+            </td>
         </tr>
       <% end %>
     </table>
@@ -72,37 +76,48 @@
       <% group.each do |supercar| %>
         <div id ="thumb-grid" class="col-xs-18 col-sm-6 col-m-4 col-lg-4">
           <div class="thumbnail">
-            <div class = "insta-thumb">    
+            <div class = "insta-thumb">
+            <div style="margin-left:5px;">
+                <h4>
+                  <%= link_to supercar.make.name, make_path(supercar.make) %> <%= link_to supercar.car_model.name, car_model_path(supercar.car_model) %>
+                </h4>
+              </div>
+            <div style="margin-left:10px;">
+              <h5>
+                <%= link_to supercar.city.name, city_path(supercar.city) %>, <%= link_to supercar.country.name, country_path(supercar.country) %>
+              </h5>
+            </div> 
+            <br>    
               <%= render :inline => supercar.html.html_safe %>
             </div>
             <div class="caption">
             <div id="thumbnail-left-info" >
-               <h3>City:</h3>
-               <h5>
-            <p><%= link_to supercar.city.name, city_path(supercar.city) %></p>
-            </h5>
-              <h3>Country:</h3>
-              <h5>
-            <p><%= link_to supercar.country.name, country_path(supercar.country) %></p>
-            </h5>
-              <% if supercar.user %>
-                  <h3>Spotted by:</h3>
-                  <p><%= supercar.user.username %></p>
-<!--                   <p><%= supercar.author_name%></p>
- -->                <% else %>
-              <% end %>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal_<%= supercar.id %>">
+              Make this BIG
+            </button>         
+              <!-- Modal -->
+              <div class="modal fade-lg" id="myModal_<%= supercar.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel"><%= supercar.make.name %> <%= supercar.car_model.name %> in <%= supercar.city.name %></h4>
+                    </div>
+                    <div class="modal-body">
+              <div style="display:inline-block;width:40%;"><%= render :inline => supercar.html.html_safe %></div>
+                    </div>
+                    <div class="modal-footer">
+<!--                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+ -->                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Modal -->  
             </div>
+                          <div style="float:right;"><p><%= link_to "visit supercar page", supercar_path(supercar.id) %></p></div>
             <div id="thumbnail-right-info">              
-              <h3>Manufacturer:</h3>       
-              <h5>
-            <p><%= link_to supercar.make.name, make_path(supercar.make) %></p>
-              </h5>
-              <h3>Model:</h3>
-
-              <h5>
-            <p><%= link_to supercar.car_model.name, car_model_path(supercar.car_model) %></p>
-
-              </h5> 
+              
             </div>          
              
                                                            

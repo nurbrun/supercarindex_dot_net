@@ -15,6 +15,7 @@
         <th><h3>Country</h3></th>
         <th><h3>Index Date</h3></th>
         <th><h3>Indexed By</h3></th>
+        <th></th>
       </tr>
       <% @supercars_by_make.each do |supercar| %>
         <tr>
@@ -50,6 +51,9 @@
             <% else %>
             <% end %>
           </td>
+          <td>
+              <p><%= link_to "visit supercar page", supercar_path(supercar.id) %></p>
+            </td>
         </tr>
       <% end %>
     </table>
@@ -89,6 +93,28 @@
             </div>
             <div class="caption">
             <div id="thumbnail-left-info" >
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal_<%= supercar.id %>">
+              Make this BIG
+            </button>         
+              <!-- Modal -->
+              <div class="modal fade-lg" id="myModal_<%= supercar.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel"><%= supercar.make.name %> <%= supercar.car_model.name %> in <%= supercar.city.name %></h4>
+                    </div>
+                    <div class="modal-body">
+              <div style="display:inline-block;width:40%;"><%= render :inline => supercar.html.html_safe %></div>
+                    </div>
+                    <div class="modal-footer">
+<!--                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+ -->                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Modal -->    
                <% if supercar.user %>
                   <h3>Indexed by:</h3>
                   <p><%= link_to supercar.user.username, user_path(supercar.user.username) %></p>
@@ -96,6 +122,8 @@
  -->                <% else %>
               <% end %>
             </div>
+                          <div style="float:right;"><p><%= link_to "visit supercar page", supercar_path(supercar.id) %></p></div>
+
             <div id="thumbnail-right-info">              
               
             </div>          
