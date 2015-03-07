@@ -112,12 +112,61 @@ class SupercarsController < ApplicationController
 
 	def update
 	  @supercar = Supercar.find(params[:id])
-	  @supercar.update(supercar_params)
-	  @supercar.make.update(make_params)
-	  @supercar.car_model.update(car_model_params)
-	  @supercar.city.update(city_params)
-	  @supercar.country.update(country_params)
+
+	  # @supercar.update(supercar_params)
+	  # @supercar.make.update(make_params)
+	  # @supercar.car_model.update(car_model_params)
+	  # @supercar.city.update(city_params)
+	  # @supercar.country.update(country_params)
 	  # @supercar.spot_type.update(spot_type_params)
+
+	  old_make_id = @supercar.make_id
+
+	  @make = Make.where(:name => params[:make][:name])
+	  make_id = @make.first_or_create.id
+	  @supercar.make_id = make_id
+	  @supercar.update_attributes(:make_id => make_id)
+
+	  if Make.where(:id => old_make_id).first.supercars.empty?
+	  	Make.where(:id => old_make_id).first.destroy!
+	  else
+	  end
+
+	  old_car_model_id = @supercar.car_model_id
+
+	  @car_model = CarModel.where(:name => params[:car_model][:name])
+	  car_model_id = @car_model.first_or_create.id
+	  @supercar.car_model_id = car_model_id
+	  @supercar.update_attributes(:car_model_id => car_model_id)
+
+	  if CarModel.where(:id => old_car_model_id).first.supercars.empty?
+	  	CarModel.where(:id => old_car_model_id).first.destroy!
+	  else
+	  end
+
+	  old_city_id = @supercar.city_id
+
+	  @city = City.where(:name => params[:city][:name])
+	  city_id = @city.first_or_create.id
+	  @supercar.city_id = city_id
+	  @supercar.update_attributes(:city_id => city_id)
+
+	  if City.where(:id => old_city_id).first.supercars.empty?
+	  	City.where(:id => old_city_id).first.destroy!
+	  else
+	  end
+
+	  old_country_id = @supercar.country_id
+
+	  @country = Country.where(:name => params[:country][:name])
+	  country_id = @country.first_or_create.id
+	  @supercar.country_id = country_id
+	  @supercar.update_attributes(:country_id => country_id)
+
+	  if Country.where(:id => old_country_id).first.supercars.empty?
+	  	Country.where(:id => old_country_id).first.destroy!
+	  else
+	  end
 
 	    if @supercar.update_attributes(supercar_params)
 	      flash[:success] = "Supercar updated"
@@ -155,7 +204,7 @@ end
 
 	private
 	def supercar_params
-	 params.require(:supercar).permit(:supercar_url)
+	 params.require(:supercar).permit(:supercar_url, :make_id, :car_model_id, :city_id, :country_id)
 	end
 	def make_params
 	 # params.require(:make).permit(:name, { tag_list: [] }, :parse => true).permit!

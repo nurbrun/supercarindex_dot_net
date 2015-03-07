@@ -10,6 +10,7 @@
   <% @cities.order('name ASC').each_slice(3).each do |group| %>
       <div class="row">
       <% group.each do |city| %>
+      <% if city.supercars.last %>
         <div id ="thumb-grid" class="col-xs-18 col-sm-6 col-m-4 col-lg-4">
           <div class="thumbnail">
 			<div class="image-cropper" position="relative" style = "position: relative; height: 260px; overflow: hidden;">
@@ -39,6 +40,9 @@
             </div>
           </div>
         </div>
+            <% else %>
+            <% end %>
+
       <% end %>
     </div><!-- End row -->
   <% end %>
