@@ -57,6 +57,11 @@
             </td>
             <td>
               <p><%= link_to "visit supercar page", supercar_path(supercar.id) %></p>
+              <% if supercar.session_count %>
+                <p>Views: <%= supercar.session_count %></p>
+              <% else %>
+                <p>Views: 0</p>
+              <% end %>
             </td>
             
             

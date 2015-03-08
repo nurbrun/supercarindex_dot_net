@@ -70,3 +70,4 @@ gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 gem "select2-rails"
 gem 'jquery-turbolinks'
+gem 'impressionist'

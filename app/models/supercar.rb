@@ -1,6 +1,9 @@
 class Supercar < ActiveRecord::Base
 require 'oembed'
-	
+
+	is_impressionable :counter_cache => true, :column_name => :session_count, :unique => :session_hash
+	# is_impressionable :counter_cache => true, :column_name => :unique_ip_count, :unique => true
+
 	belongs_to :make
 	belongs_to :car_model
 	belongs_to :city

@@ -1,5 +1,7 @@
 class SupercarsController < ApplicationController
 
+	impressionist :actions=>[:show,:index]
+
 	def index
 		
 		@supercars = Supercar.all.paginate(:page => params[:page], :per_page => 6).order("created_at DESC")
@@ -27,6 +29,7 @@ class SupercarsController < ApplicationController
 
 	def show
 		@supercar = Supercar.find(params[:id])
+		impressionist(@supercar, "wtf...")
 	end
 
 	# def search
