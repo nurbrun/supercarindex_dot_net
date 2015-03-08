@@ -1,7 +1,7 @@
 <h2>All Supercars in <%= @country.name %>!</h2>
 <br>
 
-<h4>Most Recently Indexed Supercars</h4>
+<h4>Recently Indexed</h4>
 <br>
 
 <div class="index-top-container">
@@ -12,8 +12,8 @@
         <th><h3>Make</h3></th>
         <th><h3>Model</h3></th>
         <th><h3>City</h3></th>
-        <th><h3>Country</h3></th>
-        <th><h3>Index Date</h3></th>
+<!--         <th><h3>Country</h3></th>
+ -->        <th><h3>Index Date</h3></th>
         <th><h3>Indexed By</h3></th>
         <th></th>
       <% @supercars_by_country.each do |supercar| %>
@@ -34,11 +34,11 @@
             <p><%= link_to supercar.city.name, city_path(supercar.city) %></p>
             </h5>
             </td>
-                      <td>
+                      <!-- <td>
           <h5>
             <p><%= supercar.country.name %></p>
             </h5>
-            </td>
+            </td> -->
           <td>
             <p>
               <%= supercar.created_at.strftime('%B'' ''%d' ', ' '%Y') %>

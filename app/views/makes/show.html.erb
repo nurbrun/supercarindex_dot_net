@@ -1,7 +1,7 @@
-<h2>All the <%= @make.name %>s!</h2>
+<h2>All <%= @make.name %>s!</h2>
 <br>
 
-<h4>Most Recently Indexed <%= @make.name %>s</h4>
+<h4>Most Recently Indexed</h4>
 <br>
 
 <div class="index-top-container">
@@ -9,8 +9,8 @@
  <div class = "table-responsive" >
     <table class="table table-striped table-condensed table-bordered table-hover">
       <tr>
-        <th><h3>Make</h3></th>
-        <th><h3>Model</h3></th>
+<!--         <th><h3>Make</h3></th>
+ -->        <th><h3>Model</h3></th>
         <th><h3>City</h3></th>
         <th><h3>Country</h3></th>
         <th><h3>Index Date</h3></th>
@@ -19,13 +19,13 @@
       </tr>
       <% @supercars_by_make.each do |supercar| %>
         <tr>
-          <td>
+<!--           <td>
             <h5>
             <p><%= supercar.make.name %></p>
  
             </h5>
           </td>
-          <td>
+ -->          <td>
           <h5>
             <p><%= link_to supercar.car_model.name, car_model_path(supercar.car_model) %></p>
             </h5>
@@ -80,7 +80,7 @@
             <div class = "insta-thumb">
               <div style="margin-left:5px;">
                 <h4>
-                  <%= link_to supercar.make.name, make_path(supercar.make) %> <%= link_to supercar.car_model.name, car_model_path(supercar.car_model) %>
+                  <%= link_to supercar.car_model.name, car_model_path(supercar.car_model) %>
                 </h4>
               </div>
             <div style="margin-left:10px;">
