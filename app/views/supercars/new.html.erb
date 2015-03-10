@@ -15,7 +15,7 @@
       <%= m.label :Manufacturer %>
       <div class="row">
         <div class="col-sm-6">
-          <%= m.text_field :name,:autofocus => true, :parse => true, class: "form-control" %>
+        <%= select_tag "make_id", options_from_collection_for_select(@make, "id", "name"), include_blank: true, id: "manufacturer-new" %>
         </div>
       </div>
     </div>
@@ -27,7 +27,7 @@
       <%= c.label :Model %>
       <div class="row">
         <div class="col-sm-6">
-          <%= c.text_field :name,:autofocus => true, :parse => true, class: "form-control" %>
+      <div><%= select_tag "car_model_id", options_from_collection_for_select(@car_model, "id", "name"), include_blank: true, id: "model-new" %></div>
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@
       <%= t.label :City %>
       <div class="row">
         <div class="col-sm-6">
-          <%= t.text_field :name, :autofocus => true, class: "form-control" %>
+      <div><%= select_tag "city_id", options_from_collection_for_select(@city, "id", "name"), include_blank: true, id: "city-new" %></div>
         </div>
       </div>
     </div>
@@ -52,7 +52,7 @@
       <%= y.label :Country %>
       <div class="row">
         <div class="col-sm-6">
-          <%= y.text_field :name, :autofocus => true, class: "form-control" %>
+      <div><%= select_tag "country_id", options_from_collection_for_select(@country, "id", "name"), include_blank: true, id: "country-new" %></div>  
         </div>
       </div>
     </div>

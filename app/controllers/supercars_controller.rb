@@ -17,6 +17,14 @@ class SupercarsController < ApplicationController
     @supercar.car_model = CarModel.new
     @supercar.city = City.new
     @supercar.country = Country.new
+
+    @make = Make.order('name asc').all
+    @car_model = CarModel.order('name asc').all
+    @city = City.order('name asc').all
+    @country = Country.order('name asc').all
+
+    
+
     # @supercar.spot_type = SpotType.new
   end
 
