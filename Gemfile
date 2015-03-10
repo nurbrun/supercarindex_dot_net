@@ -26,42 +26,29 @@ gem 'font-awesome-sass', '4.2.2'
 # Bootstrap 3: https://github.com/twbs/bootstrap-sass
 gem 'bootstrap-sass', '3.3.3'
 
+# Devise: https://github.com/plataformatec/devise
+gem 'devise', '3.4.1'
+
 group :development, :test do
-  gem 'byebug', '3.5.1'
-  gem 'web-console', '2.0.0'
+  gem 'best_errors'
   gem 'pry-rails'
+
   # Figaro: https://github.com/laserlemon/figaro
   gem 'figaro', '1.0.0'
 
   # Spring: https://github.com/rails/spring
   gem 'spring', '1.2.0'
-end
-
-# group :development do
-#   gem "better_errors"
-# end
-
-
-# SQLite 3
-group :development, :test do
+  gem 'quiet_assets'
+  
   gem 'sqlite3', '1.3.10'
 end
 
-# Devise: https://github.com/plataformatec/devise
-gem 'devise', '3.4.1'
-
-# Rails 12factor for Heroku: https://github.com/heroku/rails_12factor
 group :production do
+  # Rails 12factor for Heroku: https://github.com/heroku/rails_12factor
   gem 'rails_12factor'
-end
-
-# PostgreSQL gem for Heroku
-group :production do
+  
   gem 'pg'
-end
-
-# Unicorn: http://unicorn.bogomips.org
-group :production do
+  # Unicorn: http://unicorn.bogomips.org
   gem 'unicorn'
 end
 

@@ -27,11 +27,41 @@
               	<div style = "border-bottom: 1px solid #EFEEEE;">
 	              	<h4>
 	              		<%= link_to supercar.make.name, make_path(supercar.make.name) %>
+<!-- 
+      
+                <% supercars_by_make_in_city_count = supercar.make.supercars.where(city_id: city.id).count %>
+                <% city_count = city.supercars.count %>
+
+                <% supercar_by_make_city_progress = supercars_by_make_in_city_count.to_f/city_count.to_f*100 %>
+
+    
+                <div class="progress">
+                  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: <%= supercar_by_make_city_progress.to_i %>%">
+                    <span class="sr-only">45% Complete</span>
+                  </div>
+                </div>
+   =
+       -->
 	              	</h4>
               	</div>
               	<br>
 				<% supercar.make.supercars.where(city_id: city.id).select("distinct car_model_id").order('created_at ASC').each do |car_model| %>
 					<p><%= link_to car_model.car_model.name, car_model_path(car_model.car_model.name) %></p>
+<!--   
+                <% make_count = supercar.make.supercars.count %>
+                <% car_model_count = supercar.make.supercars.where(city_id: city.id).select("distinct car_model_id").count %>
+                <% city_count = city.supercars.count %>
+                <% supercars_in_city_count = city.supercars.count %>
+
+
+                <% supercars_in_city = car_model_count.to_f/city_count.to_f*100 %>
+    
+                <div class="progress">
+                  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: <%= supercars_in_city.to_i %>%">
+                    <span class="sr-only">45% Complete</span>
+                  </div>
+                </div>
+     -->
              	<% end %>
              	 <br>
              <% end %>
