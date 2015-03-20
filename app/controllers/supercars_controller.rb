@@ -8,7 +8,12 @@ class SupercarsController < ApplicationController
     @car_model = CarModel.order('name asc').all
     @city = City.order('name asc').all
     @country = Country.order('name asc').all
-    @supercars = search    
+    @supercars = search
+    # @supercars_top_five = top_five_search
+    @supercars_top_five = Supercar.last(5).reverse
+
+    # @partial = params[:view] || "default", "insta_bird"
+
   end
 
   def new
@@ -195,7 +200,7 @@ private
 
     # cars.page(params[:page])
 
-    cars.paginate(:page => params[:page], :per_page => 6).order("created_at DESC")
+    cars.paginate(:page => params[:page], :per_page => 16).order("created_at DESC")
 
 
     # search_params
@@ -259,6 +264,36 @@ private
     # end
 
     # query.page(params[:page])
+  end
+
+  def top_five_search
+
+
+    fields = {
+      :make_id => Make,
+      :car_model_id => CarModel,
+      :city_id => City,
+      :country_id => Country
+    }
+   
+    cars = Supercar.last(5).reverse
+    # cars = Supercar.all
+
+    fields.each do |field, model|
+      # if query = search_params[field]
+      unless params[field].blank?
+        # subresults = model.where("name like ?", "%#{query}%")
+        subresults = model.find(params[field])
+        cars = cars.where(field => subresults)
+        # binding.pry
+      end
+    end
+
+    # cars.page(params[:page])
+
+    cars.paginate(:page => params[:page], :per_page => 5).order("created_at DESC")
+
+
   end
 
 end

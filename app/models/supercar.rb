@@ -16,7 +16,7 @@ require 'oembed'
 
 	before_validation :save_oembed_json_to_record
 	validates_presence_of :supercar_url, :on => :create	
-	validates_format_of :supercar_url, :with => /instagram\.com\/p\/*/
+	# validates_format_of :supercar_url, :with => /instagram\.com\/p\/*/
 
 	# e.g validates_format_of :video_link, :with => /youtu\.be\/([^\?]*)/ || /^.*((v\/)|(embed\/)|(watch\?))\??v?=?([^\&\?]*).*/
 

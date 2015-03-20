@@ -1,4 +1,7 @@
+<!-- <h2>All the supercars, dawg!</h2>
 <br>
+ -->
+ <br>
   <%= image_tag("Ford_gt.png") %>
 
 
@@ -16,7 +19,7 @@
           <th><h3>Indexed By</h3></th>
           <th></th>
         </tr>
-        <% @supercars_top_five.each do |supercar| %>
+        <% @supercars.each do |supercar| %>
           <tr>
             <td>
               <h4>
@@ -72,6 +75,7 @@
         <% end %>
       </table>
         <div style="display:inline-block;"><%= page_entries_info @supercars %></div>
+        <div style="float:right;display:inline-block;"> <%= will_paginate @supercars, renderer: BootstrapPagination::Rails %></div>
 
     </div>
   <div class="index-ad-space" style="display:inline-block;width:24%;float:right;">
@@ -95,11 +99,36 @@
 
 <br>
 
-<div id ="thumb-grid" >
-  <% @supercars.each do |supercar| %>
-    <div class="col-xs-18 col-sm-6 col-m-4 col-lg-3" style="inline-block;padding-left: 1px; padding-right: 1px; padding-top: 1px; padding-bottom: 1px;">
-             <img id="imageresource" data-toggle="modal" data-target="#myModal_<%= supercar.id %>" src="<%= supercar.thumbnail_url %>" style="width: 400px; height: 264px;">
+<div class="container" id="tourpackages-carousel">
+  <% @supercars.each_slice(3).each do |group| %>
+      <div class="row">
+      <% group.each do |supercar| %>
+        <div id ="thumb-grid" class="col-xs-18 col-sm-6 col-m-4 col-lg-4">
+          <div class="thumbnail">
+            <div class = "insta-thumb">
+              <div style="margin-left:5px;"><h4><%= link_to supercar.make.name, make_path(supercar.make) %> <%= link_to supercar.car_model.name, car_model_path(supercar.car_model) %></h4></div>
+              <div style="margin-left:10px;">
+                <h5>
+                  <%= link_to supercar.city.name, city_path(supercar.city) %>, <%= link_to supercar.country.name, country_path(supercar.country) %>
+                </h5>
+              </div>
+              <br>    
+              <%= render :inline => supercar.html.html_safe %>
+            </div>
+            <div class="caption">
+            <div style="float:right;">
 
+            <FORM METHOD="LINK" ACTION="<%= supercar_path(supercar.id) %>">
+              <INPUT TYPE="submit" VALUE="visit supercar page" class="btn btn-primary">
+            </FORM>
+
+            </div>
+            <div id="thumbnail-left-info" >
+
+
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal_<%= supercar.id %>">
+              Make this BIG
+            </button>
 
             
 
@@ -109,10 +138,7 @@
                   <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h2 class="modal-title" id="myModalLabel"><%= link_to supercar.make.name, make_path(supercar.make) %> 
-<%= link_to supercar.car_model.name, car_model_path(supercar.car_model) %> in 
-<%= link_to supercar.city.name, city_path(supercar.city) %>, 
-<%= link_to supercar.country.name, country_path(supercar.country) %></h2>
+                      <h4 class="modal-title" id="myModalLabel"><%= supercar.make.name %> <%= supercar.car_model.name %> in <%= supercar.city.name %></h4>
                     </div>
                     <div class="modal-body">
               <div style="display:inline-block;width:40%;"><%= render :inline => supercar.html.html_safe %></div>
@@ -126,9 +152,24 @@
                   </div>
                 </div>
               </div>
-              <!-- Modal -->        </div>
+              <!-- Modal -->    
+
+              <% if supercar.user %>
+                  <h3>Indexed by:</h3>
+                  <p><%= link_to supercar.user.username, user_path(supercar.user.username) %></p>
+<!--                   <p><%= supercar.author_name%></p>
+ -->                <% else %>
+              <% end %>
+            </div>
+
+                                                           
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div><!-- End row -->
   <% end %>
-</div>
-
-
-        <div style="float:right;display:inline-block;"> <%= will_paginate @supercars, renderer: BootstrapPagination::Rails %></div>
+  <div style="text-align: right;"> 
+  </div>  
+</div><!-- End container -->
+       <div style="float:right;"> <%= will_paginate @supercars, renderer: BootstrapPagination::Rails %>  </div>

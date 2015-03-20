@@ -36,18 +36,15 @@
       				<% supercar.supercars.select("distinct car_model_id").order('created_at ASC').each do |car_model| %>
       					<p><%= link_to car_model.car_model.name, car_model_path(car_model.car_model.name) %></p>
 
-      <!-- progress -->
-                <% make_count = supercar.supercars.count %>
+<!--                 <% make_count = supercar.supercars.count %>
                 <% car_model_count = car_model.car_model.supercars.count %>
                 <% supercar_progress = car_model_count.to_f/make_count.to_f*100 %>
-      <!-- progress logic end -->
                 <div class="progress">
                   <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: <%= supercar_progress.to_i %>%">
                     <span class="sr-only">45% Complete</span>
                   </div>
                 </div>
-      <!-- progress end -->
-
+ -->
              	<% end %>
             </div> 
              

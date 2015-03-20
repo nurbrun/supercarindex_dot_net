@@ -15,6 +15,92 @@
       <%= m.label :Manufacturer %>
       <div class="row">
         <div class="col-sm-6">
+          <%= m.text_field :name,:autofocus => true, :parse => true, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+
+          <%= fields_for(@supercar.car_model) do |c| %>
+
+    <div class="form-group">
+      <%= c.label :Model %>
+      <div class="row">
+        <div class="col-sm-6">
+          <%= c.text_field :name,:autofocus => true, :parse => true, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+
+   
+   <%= fields_for(@supercar.city) do |t| %>
+
+    <div class="form-group">
+      <%= t.label :City %>
+      <div class="row">
+        <div class="col-sm-6">
+          <%= t.text_field :name, :autofocus => true, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+
+    <%= fields_for(@supercar.country) do |y| %>
+
+    <div class="form-group">
+      <%= y.label :Country %>
+      <div class="row">
+        <div class="col-sm-6">
+          <%= y.text_field :name, :autofocus => true, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+
+
+
+
+          <div class="form-group">
+      <%= f.label :Instagram_Image_URL %>
+      <div class="row">
+        <div class="col-sm-6">
+          <%= f.text_area :supercar_url, :autofocus => true, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <%= f.submit "Create Supercars", class: "btn btn-danger" %>
+      </div>
+    </div>
+
+    <% end %>
+    <br>
+    <p><%= link_to "Back to Supercars", supercars_path %></p>
+  </div>
+</div>
+
+
+<!-- 
+<% title("New Supercar") %>
+<div class="row">
+  <div class="col-sm-6">
+    <h1>
+      New Supercar 
+    </h1>
+    <br>
+
+    <%= form_for [@supercar] do |f| %>
+
+  
+    <%= fields_for(@supercar.make) do |m| %>
+
+    <div class="form-group">
+      <%= m.label :Manufacturer %>
+      <div class="row">
+        <div class="col-sm-6">
         <%= select_tag "make_id", options_from_collection_for_select(@make, "id", "name"), include_blank: true, id: "manufacturer-new" %>
         </div>
       </div>
@@ -81,3 +167,4 @@
     <p><%= link_to "Back to Supercars", supercars_path %></p>
   </div>
 </div>
+ -->
