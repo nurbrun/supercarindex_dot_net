@@ -1,0 +1,68 @@
+<% title("New POTD") %>
+<div class="row">
+  <div class="col-sm-6">
+    <h1>
+      New POTD 
+    </h1>
+    <br>
+
+    <%= form_for [@potd] do |f| %>
+
+  
+    <div class="form-group">
+      <%= f.label :Instagram_Image_URL %>
+      <div class="row">
+        <div class="col-sm-6">
+          <%= f.text_area :supercar_url, :autofocus => true, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :Manufacturer %>
+      <div class="row">
+        <div class="col-sm-6">
+          <%= f.text_area :make, :autofocus => true, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :Model %>
+      <div class="row">
+        <div class="col-sm-6">
+          <%= f.text_area :car_model, :autofocus => true, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :City %>
+      <div class="row">
+        <div class="col-sm-6">
+          <%= f.text_area :city, :autofocus => true, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :Country %>
+      <div class="row">
+        <div class="col-sm-6">
+          <%= f.text_area :country, :autofocus => true, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <%= f.submit "Create POTD", class: "btn btn-danger" %>
+      </div>
+    </div>
+
+    <% end %>
+    <br>
+    <p><%= link_to "Back to Supercars", supercars_path %></p>
+  </div>
+</div>
+

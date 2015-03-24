@@ -7,6 +7,7 @@ SupercarindexDotNet::Application.routes.draw do
   get "user/:id", to: "users#show", as: "user"
   
   resources :supercars
+  resources :potds
   # resources :makes
   resources :car_models
   resources :cities
@@ -31,6 +32,7 @@ SupercarindexDotNet::Application.routes.draw do
     root "base#index"
     resources :users
     resources :supercars
+    resources :potds
     
   end
 

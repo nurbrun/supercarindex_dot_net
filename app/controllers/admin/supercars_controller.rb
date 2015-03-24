@@ -1,4 +1,5 @@
 class Admin::SupercarsController < Admin::BaseController
+  before_filter :require_admin!
 
   before_action :set_supercar, only: [
     :show,
