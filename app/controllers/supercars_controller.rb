@@ -4,12 +4,13 @@ class SupercarsController < ApplicationController
 
   def index
     
+    @potd = Potd.last
     @make = Make.order('name asc').all
     @car_model = CarModel.order('name asc').all
     @city = City.order('name asc').all
     @country = Country.order('name asc').all
     @supercars = search
-    @supercars_top_five = Supercar.last(5).reverse
+    @supercars_top_five = Supercar.first(5).reverse
 
     # @partial = params[:view] || "default", "insta_bird"
 
