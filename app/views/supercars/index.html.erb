@@ -341,21 +341,43 @@
   <div class="index-ad-space" style="display:inline-block;width:30%;float:right;">
 
 
-
+  <% if @potd %>
    <div class="thumbnail" id="home-nurbrun">
     <h1> POTD </h1>
           <div class = "insta-thumb">
              <%= @potd.html.html_safe %>
           </div>
             <div class="caption">
-             <h5><%= link_to 'Lamborghini', '/makes/Lamborghini' %> <%= link_to 'Aventador', '/models/Aventador' %></h5>
-             <h5 style="float:right;"><%= link_to 'Toronto', '/cities/Toronto' %> <%= link_to 'Canada', '/countries/Canada' %></h5>  
-              
-                  <h4>Spotted by:</h4>
-                  <h5>nurbrun</h5>
-                                              
+             <h5>
+              <% if @potd.make == Make.where(:name => @potd.make) %>
+                <%= link_to @potd.make, make_path(@potd.make) %>
+                <% else %>
+                  <%= @potd.make %>
+              <% end %>
+              <% if @potd.car_model == CarModel.where(:name => @potd.car_model) %>
+                <%= link_to @potd.car_model, make_path(@potd.car_model) %>
+                <% else %>
+                  <%= @potd.car_model %>
+              <% end %>
+              </h5>
+             <h5 style="float:right;">
+             
+              <% if @potd.city == City.where(:name => @potd.city) %>
+                <%= link_to @potd.city, city_path(@potd.city) %>,
+
+                <% else %>
+                  <% @potd.city %>
+              <% end %>
+              <% if @potd.country == Country.where(:name => @potd.country) %>
+                <%= link_to @potd.country, country_path(@potd.country) %>
+                <% else %>
+                  <% @potd.country %>
+              <% end %>
+              </h5>                                              
             </div>
-          </div>
+  </div>
+  <% end %>
+
   </div>
   <br>
   
